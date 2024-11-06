@@ -18,8 +18,4 @@ pipeline {
         }
         stage ('this is git stage') {
             steps {
-            echo "this is git MEDAK"
-            }
-        }
-        }
-    }
+
