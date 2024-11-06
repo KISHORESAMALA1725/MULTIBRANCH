@@ -15,7 +15,11 @@ pipeline {
             steps {
             echo "this is nexus stage"
             }
-
+        }
+        stage ('this is git stage') {
+            steps {
+            echo "this is git stage"
+            }
         }
         }
     }
