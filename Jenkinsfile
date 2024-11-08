@@ -1,25 +1,60 @@
 pipeline {
     agent any
     stages {
-        stage ('This is Build Stage') {
+        stage ('Build') {
             steps {
-            echo " This is Maven stage"
+                echo "Building Node Application"
             }
         }
-        stage ('This is Sonar stage') {
-            steps {
-                echo "this is sonarqube stage"
+        stage ('Deploy to prod') {
+            options {
+                timeout(time: 30, unit: "SECONDS")
             }
-        }
-        stage ('this is nexus stage') {
-            steps {
-            echo "this is nexus stage"
+            input {
+                message "should i continue ??"
+                ok "Approved"
+                submitter "maha"
+                submitterParameter "whoapproved"
+                parameters {
+                    string (
+                        name: 'USR_NAME',
+                        defaultValue: 'siva',
+                        description: 'Please enter your name'
+                    )
+                    string (
+                        name: 'CHG_TKT',
+                        defaultValue: 'CHG1234',
+                        description: 'Please enter your name'
+                    )
+                    boolenParam(
+                        name: 'SRE_APPROVED',
+                        defaultValue: true,
+                        description: 'SRE approval taken for this release ???'
+                    )
+                    choice(
+                        choices: 'Regular\nHotfix',
+                        description: "what sort of release is this, Regular or HOT-FIX",
+                        name: 'Release'
+                    )
+                    text(
+                        name: 'Notes',
+                        defaultValue: "Enter Release Notes",
+                        description:  "Please enter description"
+                    )
+                    credentials(
+                        name: 'mycredentials',
+                        description: "myCredentials",
+                        required: true
+                    )
+                }
             }
-        }
-        stage ('this is git stage') {
             steps {
-            echo "this is git MEDAK"
+                echo "Deploying to production"
+                echo "Welcome ${USR_NAME}"
+                echo "Status of approval ${SRE_APPROVED}"
+                echo "this is a ${Release}-Release"
+                echo "Approved by this Person: ${whoapproved}"
             }
-        }
         }
     }
+}
