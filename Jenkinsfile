@@ -1,60 +1,40 @@
+ //  input(message: 'Do you want to proceed', id: 'yes', ok: 'yes', submitter: "developer", submitterParameter: "developer")
 pipeline {
     agent any
     stages {
-        stage ('Build') {
+        stage ('Build-Stage') {
             steps {
-                echo "Building Node Application"
+                echo "We are building NODEJS Application"
             }
         }
         stage ('Deploy to prod') {
-            options {
-                timeout(time: 30, unit: "SECONDS")
+            options { 
+                timeout(time: 30, unit: 'SECONDS')
             }
             input {
-                message "should i continue ??"
-                ok "Approved"
-                submitter "maha"
-                submitterParameter "whoapproved"
-                parameters {
-                    string (
-                        name: 'USR_NAME',
-                        defaultValue: 'siva',
-                        description: 'Please enter your name'
-                    )
-                    string (
-                        name: 'CHG_TKT',
-                        defaultValue: 'CHG1234',
-                        description: 'Please enter your name'
-                    )
-                    booleanParam(
-                        name: 'SRE_APPROVED',
-                        defaultValue: true,
-                        description: 'SRE approval taken for this release ???'
-                    )
-                    choice(
-                        choices: 'Regular\nHotfix',
-                        description: "what sort of release is this, Regular or HOT-FIX",
-                        name: 'Release'
-                    )
-                    text(
-                        name: 'Notes',
-                        defaultValue: "Enter Release Notes",
-                        description:  "Please enter description"
-                    )
-                    credentials(
-                        name: 'mycredentials',
-                        description: "myCredentials",
-                        required: true
-                    )
+              message "Should i continue??"
+              ok "approved"
+              submitter "maha"
+              submitterParameter "whoapproved"
+              parameters {
+                    string (name: 'USR_NAME', defaultValue: 'KISHORE', description: 'Please enter your name')
+                    string (name: 'CHG_TICKET', defaultValue: 'CHG12345', description: 'Please ENTER CHG# number')
+                    booleanParam(name: 'SRE_APPROVED', defaultValue: true, description: 'Please select True or False')
+                    choice (name: 'COURSE', choices: ['Gcp', 'DevOps', 'K8S'], description: 'Please enter description')
+                    text (name: 'Enter your Text', defaultValue: 'Please input your TEXT', description: 'please input some text her')
+                    credentials(name: 'DOCKER_CREDS', required: true, description: 'DOCKER_CREDS')
                 }
-            }
-            steps {
-                echo "Deploying to production"
-                echo "Welcome ${USR_NAME}"
-                echo "Status of approval ${SRE_APPROVED}"
-                echo "this is a ${Release}-Release"
-                echo "Approved by this Person: ${whoapproved}"
+
+                }
+                steps {
+                    echo "Deploying to PRODUCTION"
+                    echo "Welcome Mr.${params.USR_NAME}"
+                    echo "status of approval ${params.SRE_APPROVED}"
+                    echo "this is ${params.CHOICE}"
+                    echo "Approved by this person-${whoapproved}"                
             }
         }
-    }
-}
+     }
+  }
+
+
