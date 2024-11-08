@@ -26,7 +26,7 @@ pipeline {
                         defaultValue: 'CHG1234',
                         description: 'Please enter your name'
                     )
-                    boolenParam(
+                    booleanParam(
                         name: 'SRE_APPROVED',
                         defaultValue: true,
                         description: 'SRE approval taken for this release ???'
