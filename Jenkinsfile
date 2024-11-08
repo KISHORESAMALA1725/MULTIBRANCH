@@ -30,7 +30,7 @@ pipeline {
                     echo "Deploying to PRODUCTION"
                     echo "Welcome Mr.${USR_NAME}"
                     echo "status of approval ${SRE_APPROVED}"
-                    echo "this is ${CHOICE}"
+                    echo "this is ${COURSE}"
                     echo "Approved by this person-${whoapproved}"                
             }
         }
