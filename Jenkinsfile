@@ -28,9 +28,9 @@ pipeline {
                 }
                 steps {
                     echo "Deploying to PRODUCTION"
-                    echo "Welcome Mr.${params.USR_NAME}"
-                    echo "status of approval ${params.SRE_APPROVED}"
-                    echo "this is ${params.CHOICE}"
+                    echo "Welcome Mr.${USR_NAME}"
+                    echo "status of approval ${SRE_APPROVED}"
+                    echo "this is ${CHOICE}"
                     echo "Approved by this person-${whoapproved}"                
             }
         }
